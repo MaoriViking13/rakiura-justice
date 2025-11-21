@@ -1,1 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngā Uri o Rakiura - The Case for Rectification</title>
+    
+    <!-- Fonts: Merriweather (Serif for headings) and Inter (Sans for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pounamu: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        },
+                        earth: {
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            800: '#44403c',
+                            900: '#292524',
+                        },
+                        alert: {
+                            800: '#991b1b',
+                            50: '#fef2f2',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #44403c;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #166534;
+        }
+        
+        .hero-pattern {
+            background-color: #14532d;
+            background-image: url("https://images.unsplash.com/photo-1507646870702-d48050362547?q=80&w=2574&auto=format&fit=crop");
+            background-blend-mode: multiply;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Timeline connecting line */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #e5e7eb;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-sans text-earth-800 bg-earth-100 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-pounamu-950 text-white shadow-lg fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <i class="fa-solid fa-scale-balanced text-pounamu-600 text-3xl"></i>
+                        <div>
+                            <h1 class="font-serif text-lg font-bold tracking-tight uppercase">Ngā Uri o Rakiura</h1>
+                            <p class="text-[10px] text-pounamu-100 uppercase tracking-widest">Legal & Historical Archive</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-6 text-sm font-medium tracking-wide">
+                    <a href="#deed" class="hover:text-pounamu-600 transition-colors">The 1864 Deed</a>
+                    <a href="#breaches" class="hover:text-red-400 transition-colors">The Breaches</a>
+                    <a href="#legislation" class="hover:text-pounamu-600 transition-colors">The Laws</a>
+                    <a href="#rangatira" class="hover:text-pounamu-600 transition-colors">Signatories</a>
+                    <a href="#timeline" class="hover:text-pounamu-600 transition-colors">Timeline</a>
+                    <a href="#register" class="bg-pounamu-600 hover:bg-pounamu-700 text-white px-4 py-2 rounded text-xs uppercase tracking-widest font-bold transition-all">
+                        Join the Cause
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
+                    <button onclick="toggleMenu()" class="text-white hover:text-pounamu-600 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-pounamu-900 border-t border-pounamu-800 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#deed" onclick="toggleMenu()" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-100 hover:bg-pounamu-800">The 1864 Deed</a>
+                <a href="#breaches" onclick="toggleMenu()" class="block px-3 py-3 rounded-md text-sm font-medium text-red-300 hover:bg-pounamu-800">The Breaches</a>
+                <a href="#legislation" onclick="toggleMenu()" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-100 hover:bg-pounamu-800">The Laws</a>
+                <a href="#timeline" onclick="toggleMenu()" class="block px-3 py-3 rounded-md text-sm font-medium text-gray-100 hover:bg-pounamu-800">Timeline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section: The Legal Case -->
+    <header class="hero-pattern min-h-screen flex items-center justify-center relative text-white px-4 pt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-earth-100"></div>
+        <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="text-left fade-in">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="px-3 py-1 bg-red-700 text-white text-xs font-bold uppercase tracking-widest rounded-sm">Active Grievance</span>
+                    <span class="px-3 py-1 border border-white/30 text-white text-xs font-bold uppercase tracking-widest rounded-sm">Section 45 Application</span>
+                </div>
+                <h1 class="font-serif text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    The Theft of the <br/><span class="text-pounamu-400 italic">Tītī Islands</span>
+                </h1>
+                <p class="text-lg text-gray-200 mb-8 font-light leading-relaxed">
+                    The 1864 Rakiura Deed of Cession was a contract. That contract was broken by the Crown through the 1910 and 1921 Adjustment Acts. We are gathering the evidence to restore the rights of the true descendants.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#breaches" class="px-6 py-4 bg-pounamu-700 text-white font-bold rounded hover:bg-pounamu-800 transition-all shadow-lg flex items-center gap-3">
+                        <i class="fa-solid fa-gavel"></i> Examine the Breaches
+                    </a>
+                    <a href="#register" class="px-6 py-4 border border-white text-white font-bold rounded hover:bg-white/10 transition-all flex items-center gap-3">
+                        Register Your Whakapapa
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Document Preview Card -->
+            <div class="hidden md:block relative fade-in">
+                <div class="absolute -inset-4 bg-white/5 rounded-lg transform rotate-2"></div>
+                <div class="bg-earth-100 text-earth-900 p-8 rounded-lg shadow-2xl font-serif relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-pounamu-800/20 absolute top-6 left-6"></i>
+                    <p class="text-xl italic leading-relaxed mb-6 z-10 relative">
+                        "The Tītī Islands shall be reserved for the use of the Natives ... and their descendants <strong class="text-red-700">forever</strong> (mo ake tonu atu)."
+                    </p>
+                    <div class="border-t border-earth-300 pt-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-sm">Clause 2, Rakiura Deed of Cession</p>
+                            <p class="text-xs text-gray-500">29th June, 1864</p>
+                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Seal_of_New_Zealand.svg/1200px-Seal_of_New_Zealand.svg.png" class="h-12 grayscale opacity-50" alt="Seal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: The Primary Evidence (1864) -->
+    <section id="deed" class="py-20 bg-white border-b border-earth-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 border-l-4 border-pounamu-800 pl-6">
+                <h2 class="font-serif text-3xl font-bold text-earth-900">Exhibit A: The 1864 Deed & Appendage</h2>
+                <p class="text-gray-600 mt-2">The undeniable foundation of our claim. This is the Constitutional Anchor.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- The Agreement -->
+                <div class="col-span-1 lg:col-span-2 bg-earth-50 p-8 rounded-lg border border-earth-200">
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-pounamu-900">Te Tāpiritanga (The Appendage)</h3>
+                    <p class="mb-6 text-gray-700">
+                        Commissioner Henry Tacy Clarke recorded specifically which Chiefs were to hold rights to which islands. This was not a general list; it was a specific allocation of property rights.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse bg-white shadow-sm">
+                            <thead class="bg-pounamu-900 text-white">
+                                <tr>
+                                    <th class="p-3 border border-pounamu-800">Island Group</th>
+                                    <th class="p-3 border border-pounamu-800">Original Reserved Owners (1864)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="p-3 font-bold text-pounamu-900 bg-pounamu-50">Long Island (Taukihepa)</td>
+                                    <td class="p-3">Matiu Keapane, Rawiri Mamaru, Rewati te Akau, Rawiri te Awha, Tauira, Tioti Mauhe, Aperahama Hutoitoi, Henare Paremata, Tioti Turi, Ihaia Mi, Patepa te Huruhura, John Paina, William Fisher, Tukurua, Horomona Patu</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-pounamu-900 bg-pounamu-50">Poutama</td>
+                                    <td class="p-3">Hohepa Tarawa, Mere Titahi, Paitu, Rawiri Tapuae</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-pounamu-900 bg-pounamu-50">Kaihuka & Potuatua</td>
+                                    <td class="p-3">Tioni Topi Patuki, Tioni Kihau, Fred Kihau, Ellen Kihau</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-2 text-xs text-gray-500 italic text-right">*Partial excerpt for evidence display. Full list in archives.</div>
+                    </div>
+                </div>
+
+                <!-- The Signatories -->
+                <div class="bg-earth-900 text-earth-100 p-8 rounded-lg shadow-xl">
+                    <h3 class="font-serif text-xl font-bold mb-4 text-pounamu-400">The 34 Signatories</h3>
+                    <p class="text-sm text-earth-300 mb-6">These are the only individuals with the authority to treat for the land. Any beneficiary list that does not trace to these names is invalid.</p>
+                    <ul class="space-y-2 text-sm font-mono max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                        <li class="border-b border-earth-700 pb-1">1. John Topi Patuki</li>
+                        <li class="border-b border-earth-700 pb-1">2. Hone Wetere Korako</li>
+                        <li class="border-b border-earth-700 pb-1">3. Tare Wetere te Kahu</li>
+                        <li class="border-b border-earth-700 pb-1">4. Solomon Pohio</li>
+                        <li class="border-b border-earth-700 pb-1">5. Kerei Kahuti</li>
+                        <li class="border-b border-earth-700 pb-1">6. Rawiri Mamaru</li>
+                        <!-- ... (List implies 34) ... -->
+                        <li class="border-b border-earth-700 pb-1 text-earth-500 italic">[Full list of 34 available in court documents]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE BREACHES (The Core Legal Argument) -->
+    <section id="breaches" class="py-20 bg-earth-100 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-red-100 text-red-800 px-4 py-1 rounded-full text-sm font-bold mb-4 border border-red-200">
+                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> The Crown's Errors
+                </div>
+                <h2 class="font-serif text-4xl font-bold text-earth-900 mb-4">The Legislative Breaches</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    How the government legally stole the rights from the specific descendants and opened them to a generalized list, diluting the ownership and violating the 1864 Deed.
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Breach 1: 1910 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border-l-8 border-red-700">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-serif font-bold text-gray-900">1. Native Land Claims Adjustment Act 1910</h3>
+                            <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded text-sm font-mono">Act No. 75</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 font-bold">The Crime: The Inquiry that ignored the Appendage.</p>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            This Act empowered the Native Land Court to determine "beneficial owners." Instead of looking at the 1864 Appendage (the contract), the Court began constructing a new list based on general "Rakiura" ancestry, ignoring the specific island allocations made by the Chiefs.
+                        </p>
+                        <div class="bg-red-50 p-4 rounded border border-red-100 text-sm text-red-900">
+                            <strong>Impact:</strong> Opened the door for non-descendants of the specific island owners to claim rights they were never gifted.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breach 2: 1921 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border-l-8 border-red-700">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-serif font-bold text-gray-900">2. Reserves and Other Lands Disposal Act 1921</h3>
+                            <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded text-sm font-mono">Section 64</span>
+                        </div>
+                        <p class="text-gray-700 mb-4 font-bold">The Crime: Cementing the Error.</p>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            This Act finalized the lists created by the 1910 inquiry. It turned administrative errors into statutory law. It created the "Beneficial Owners" list which stands in direct contradiction to the "Appendage Owners."
+                        </p>
+                        <div class="bg-red-50 p-4 rounded border border-red-100 text-sm text-red-900">
+                            <strong>Impact:</strong> Thousands of legitimate descendants were disenfranchised, and thousands of illegitimate claimants were added. This is the basis of our current Section 45 application.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Timeline of Injustice -->
+    <section id="timeline" class="py-20 bg-pounamu-950 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl font-bold mb-12 text-center">Timeline of Dispossession</h2>
+            
+            <div class="relative timeline-line py-10">
+                <!-- Event 1 -->
+                <div class="relative z-10 mb-16">
+                    <div class="flex items-center w-full">
+                        <div class="w-1/2 text-right pr-8">
+                            <h3 class="text-2xl font-bold text-pounamu-400">June 29, 1864</h3>
+                            <p class="font-bold">Deed of Cession Signed</p>
+                            <p class="text-sm text-gray-400">Rakiura sold for £6,000. Appendage reserves Tītī Islands "forever".</p>
+                        </div>
+                        <div class="w-8 h-8 bg-pounamu-600 rounded-full border-4 border-pounamu-900 absolute left-1/2 transform -translate-x-1/2"></div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="relative z-10 mb-16">
+                    <div class="flex items-center w-full">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-8 h-8 bg-red-600 rounded-full border-4 border-pounamu-900 absolute left-1/2 transform -translate-x-1/2"></div>
+                        <div class="w-1/2 pl-8">
+                            <h3 class="text-2xl font-bold text-red-400">1910 Inquiry</h3>
+                            <p class="font-bold">The First Breach</p>
+                            <p class="text-sm text-gray-400">Native Land Claims Adjustment Act authorizes a new inquiry, ignoring the Appendage.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="relative z-10 mb-16">
+                    <div class="flex items-center w-full">
+                        <div class="w-1/2 text-right pr-8">
+                            <h3 class="text-2xl font-bold text-red-400">1921 Final List</h3>
+                            <p class="font-bold">The "Beneficial Owners" Created</p>
+                            <p class="text-sm text-gray-400">Reserves Act solidifies the incorrect lists, stripping rights from the true 34 signatory lines.</p>
+                        </div>
+                        <div class="w-8 h-8 bg-red-600 rounded-full border-4 border-pounamu-900 absolute left-1/2 transform -translate-x-1/2"></div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="relative z-10">
+                    <div class="flex items-center w-full">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-8 h-8 bg-white rounded-full border-4 border-pounamu-900 absolute left-1/2 transform -translate-x-1/2"></div>
+                        <div class="w-1/2 pl-8">
+                            <h3 class="text-2xl font-bold text-white">Present Day</h3>
+                            <p class="font-bold">Section 45 Application</p>
+                            <p class="text-sm text-gray-400">We fight to amend the lists under Te Ture Whenua Māori Act 1993.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Call to Action / Education -->
+    <section id="register" class="py-20 bg-earth-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-4xl font-bold mb-6">Stand With The Truth</h2>
+            <p class="text-xl text-gray-300 mb-10">
+                This is not just about history; it is about legal rectification. We need every descendant of the original 34 signatories to register, providing the collective weight needed for our court case.
+            </p>
+            
+            <div class="bg-white text-earth-900 p-8 rounded-lg shadow-2xl text-left">
+                <form onsubmit="handleSubmit(event)" class="space-y-6">
+                    <div class="bg-red-50 border-l-4 border-red-600 p-4 mb-6">
+                        <p class="text-sm font-bold text-red-900">CRITICAL: Only register if you can trace whakapapa to one of the 1864 Signatories.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">First Name</label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded bg-gray-50" placeholder="Hone">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Last Name</label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded bg-gray-50" placeholder="Patuki">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Which Signatory do you descend from?</label>
+                        <select class="w-full p-3 border border-gray-300 rounded bg-gray-50">
+                            <option>John Topi Patuki</option>
+                            <option>Hone Wetere Korako</option>
+                            <option>Rawiri Mamaru</option>
+                            <option>Horomona Patu</option>
+                            <option>Other (Please Specify in Message)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Evidence / Whakapapa Details</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded bg-gray-50 h-32" placeholder="Please detail your connection..."></textarea>
+                    </div>
+
+                    <button class="w-full bg-pounamu-900 text-white font-bold py-4 rounded hover:bg-pounamu-800 transition-colors text-lg uppercase tracking-widest">
+                        Submit for Verification
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-12 text-sm border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-white font-bold uppercase tracking-widest mb-4">Legal Disclaimer</h4>
+                <p class="mb-4">
+                    This website is an educational resource and an archive of historical grievances. It serves as a gathering point for descendants pursuing a Section 45 application under the Te Ture Whenua Māori Act 1993.
+                </p>
+                <p>
+                    The information presented here is based on the 1864 Deed of Cession, the 1864 Appendage, and subsequent legislative acts.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest mb-4">Case Files</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white">1864 Deed Transcript</a></li>
+                    <li><a href="#" class="hover:text-white">The Appendage (Original)</a></li>
+                    <li><a href="#" class="hover:text-white">1910 Act Analysis</a></li>
+                    <li><a href="#" class="hover:text-white">1921 Act Analysis</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest mb-4">Contact Legal Team</h4>
+                <p class="mb-2">legal@rakiura-justice.org</p>
+                <p>PO Box 1864, Invercargill</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("Thank you. Your details have been securely recorded for the registry.");
+        }
+    </script>
+</body>
+</html>
